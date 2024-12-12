@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Passcode Entry</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #1E293B;
+            color: white;
+        }
+
+        .container {
+            text-align: center;
+        }
+
+        .title {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+        }
+
+        .description {
+            margin-bottom: 30px;
+            font-size: 0.9rem;
+        }
+
+        .input-container {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 30px;
+        }
+
+        .input-box {
+            width: 40px;
+            height: 40px;
+            border: 2px solid white;
+            border-radius: 5px;
+            background-color: transparent;
+            text-align: center;
+            font-size: 1.2rem;
+            color: white;
+        }
+
+        .input-box:focus {
+            outline: none;
+            border-color: #007bff;
+        }
+
+        .keypad {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+        }
+
+        .key {
+            width: 60px;
+            height: 60px;
+            border: none;
+            border-radius: 50%;
+            font-size: 1.2rem;
+            background-color: transparent;
+            color: white;
+            cursor: pointer;
+        }
+
+        .key:active {
+            background-color: #555;
+        }
+
+        .special {
+            background-color: transparent;
+            border: none;
+            font-size: 1.5rem;
+        }
+
+        .special:active {
+            color: #007bff;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="title">Enter Passcode</div>
+        <div class="description">Passcode adds an extra layer of security when using the app</div>
+        <div class="input-container">
+            <input type="text" class="input-box" maxlength="1" disabled>
+            <input type="text" class="input-box" maxlength="1" disabled>
+            <input type="text" class="input-box" maxlength="1" disabled>
+            <input type="text" class="input-box" maxlength="1" disabled>
+        </div>
+        <div class="keypad">
+            <button class="key" onclick="enterDigit(1)">1</button>
+            <button class="key" onclick="enterDigit(2)">2</button>
+            <button class="key" onclick="enterDigit(3)">3</button>
+            <button class="key" onclick="enterDigit(4)">4</button>
+            <button class="key" onclick="enterDigit(5)">5</button>
+            <button class="key" onclick="enterDigit(6)">6</button>
+            <button class="key" onclick="enterDigit(7)">7</button>
+            <button class="key" onclick="enterDigit(8)">8</button>
+            <button class="key" onclick="enterDigit(9)">9</button>
+            <button class="special" onclick="fingerprintAccess()">🔎</button>
+            <button class="key" onclick="enterDigit(0)">0</button>
+            <button class="special" onclick="clearPasscode()">❌</button>
+        </div>
+    </div>
+
+    <script>
+        const validPasscodes = ["0421", "0422"];
+        let enteredPasscode = "";
+
+        function enterDigit(digit) {
+            const inputBoxes = document.querySelectorAll(".input-box");
+            if (enteredPasscode.length < 4) {
+                enteredPasscode += digit;
+                inputBoxes[enteredPasscode.length - 1].value = digit;
+            }
+            
+            if (enteredPasscode.length === 4) {
+                validatePasscode();
+            }
+        }
+
+        function clearPasscode() {
+            enteredPasscode = "";
+            document.querySelectorAll(".input-box").forEach(box => box.value = "");
+        }
+
+        function validatePasscode() {
+            if (validPasscodes.includes(enteredPasscode)) {
+                alert("Access Granted");
+                window.location.href = "index.html"; // Replace with your main page URL
+            } else {
+                alert("Invalid Passcode");
+                clearPasscode();
+            }
+        }
+
+        function fingerprintAccess() {
+            alert("Fingerprint access not implemented yet.");
+        }
+    </script>
+</body>
+</html>

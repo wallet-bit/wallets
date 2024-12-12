@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Receive</title>
+  <style>
+    /* General Styles */
+    body {
+      background-color: #0F172A;
+      color: white;
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin: 0;
+      padding: 20px;
+      box-sizing: border-box; /* Ensure padding doesn't affect layout */
+    }
+
+    .receive-container {
+      max-width: 100%;
+      margin: 0 auto;
+      padding: 20px;
+      background-color: #0F172A;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+      width: 100%;
+      box-sizing: border-box;
+    }
+
+    h1 {
+      font-size: 1.5em;
+      margin-bottom: 20px;
+    }
+
+    .warning {
+      background-color: #ffcc00;
+      color: #121212;
+      padding: 10px;
+      border-radius: 5px;
+      font-size: 0.9em;
+      margin-bottom: 20px;
+    }
+
+    .qr-section {
+      margin: 20px 0;
+    }
+
+    .qr-section img {
+      width: 100%; /* Ensure the image fits within the container */
+      max-width: 250px; /* Limit the max size of the QR code */
+      height: auto;
+      margin: 0 auto;
+      border: 2px solid #fff;
+      padding: 10px;
+      background-color: white;
+      border-radius: 10px;
+    }
+
+    #qr-address {
+      margin-top: 10px;
+      font-size: 0.9em;
+      color: #bbb;
+    }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-around;
+      gap: 10px;
+      margin: 20px 0;
+    }
+
+    .action-btn {
+      background-color: transparent;
+      border: 1px solid #555;
+      color: white;
+      padding: 10px 20px;
+      border-radius: 5px;
+      cursor: pointer;
+      flex: 1 1 30%; /* Make buttons responsive */
+      min-width: 120px;
+      text-align: center;
+    }
+
+    .action-btn:hover {
+      background-color: #444;
+    }
+
+    .deposit-info {
+      margin-top: 20px;
+      text-align: center;
+    }
+
+    .deposit-btn {
+      background-color: #28a745;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .deposit-btn:hover {
+      background-color: #218838;
+    }
+
+    .deposit-info p {
+      font-size: 0.9em;
+      color: #bbb;
+      margin-top: 10px;
+    }
+
+    /* Back arrow styling */
+    .back-arrow {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      font-size: 1.5em;
+      color: #fff;
+      cursor: pointer;
+    }
+
+    /* Media Queries for small devices */
+    @media (max-width: 768px) {
+      h1 {
+        font-size: 1.2em;
+      }
+
+      .receive-container {
+        padding: 15px;
+      }
+
+      .action-btn {
+        padding: 8px 15px;
+        font-size: 0.9em;
+      }
+
+      .deposit-btn {
+        padding: 8px 15px;
+        font-size: 0.9em;
+      }
+
+      .qr-section img {
+        max-width: 200px; /* Adjust QR image size for smaller screens */
+      }
+    }
+
+    @media (max-width: 480px) {
+      .receive-container {
+        padding: 10px;
+      }
+
+      .action-btn {
+        padding: 6px 12px;
+        font-size: 0.8em;
+      }
+
+      .deposit-btn {
+        padding: 6px 12px;
+        font-size: 0.8em;
+      }
+
+      .qr-section img {
+        max-width: 180px; /* Further reduce QR image size */
+      }
+    }
+
+  </style>
+</head>
+<body>
+  <!-- Back Arrow -->
+  <div class="back-arrow" onclick="goBack()">← Back</div>
+
+  <div class="receive-container">
+    <h1>Receive</h1>
+    <div class="warning">
+      <p>⚠ Only send Bitcoin (BTC) network assets to this address. Other assets will be lost forever.</p>
+    </div>
+    <div class="qr-section">
+      <!-- Add the QR code image -->
+      <img src="https://i.postimg.cc/W4VCFm38/activate-wallet-qr.png" alt="QR Code for Wallet Activation">
+      <p id="qr-address">Scan to activate your wallet</p>
+    </div>
+    <div class="actions">
+      <button class="action-btn">Copy</button>
+      <button class="action-btn">Set Amount</button>
+      <button class="action-btn">Share</button>
+    </div>
+    <div class="deposit-info">
+      <button class="deposit-btn">Deposit from Exchange</button>
+      <p>By direct transfer from your account</p>
+    </div>
+  </div>
+
+  <script>
+    // Back button functionality
+    function goBack() {
+      window.history.back();  // This will take the user to the previous page
+    }
+  </script>
+</body>
+</html>

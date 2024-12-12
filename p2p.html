@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>p2p Market</title>
+    <style>
+        /* Global Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #1E293B;
+    color: white;
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+}
+
+.wallet-container {
+    max-width: 400px;
+    width: 100%;
+    background-color: #1E293B;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+}
+
+/* Header */
+.wallet-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 15px;
+    background-color: transparent;
+    border-bottom: 1px solid #333;
+}
+
+.wallet-title {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.wallet-title h1 {
+    font-size: 20px;
+}
+
+.wallet-back {
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.verified-badge {
+    color: #1DA1F2;
+    font-size: 20px;
+}
+
+.wallet-menu {
+    font-size: 20px;
+    cursor: pointer;
+}
+
+/* P2P Market Section */
+.wallet-market {
+    text-align: center;
+    padding: 20px 15px;
+}
+
+.market-icon {
+    width: 50px;
+    height: 50px;
+    margin-bottom: 10px;
+}
+
+.wallet-market h2 {
+    margin-bottom: 5px;
+    font-size: 18px;
+}
+
+.wallet-market p {
+    font-size: 14px;
+    color: #AAA;
+    margin-bottom: 15px;
+}
+
+.market-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.market-buttons .btn {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.buy-btn {
+    background-color: #1DA1F2;
+    color: white;
+    width: 150px;
+}
+
+.sell-btn {
+    background-color: #F05454;
+    color: white;
+    width: 150px;
+}
+
+/* Menu Items */
+.wallet-menu-items {
+    padding: 15px;
+}
+
+.menu-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 0;
+    border-bottom: 1px solid #333;
+    cursor: pointer;
+}
+
+.menu-item:hover {
+    background-color: #333;
+}
+
+.menu-icon {
+    font-size: 18px;
+    color: #1DA1F2;
+}
+
+.menu-desc {
+    font-size: 12px;
+    color: #AAA;
+}
+
+/* Footer Orders */
+.wallet-orders {
+    text-align: center;
+    padding: 15px;
+    border-top: 1px solid #333;
+}
+
+.wallet-orders h3 {
+    margin-bottom: 5px;
+    font-size: 16px;
+}
+
+.wallet-orders p {
+    font-size: 14px;
+    color: #AAA;
+}
+.wallet-back {
+    font-size: 24px; /* Size of the arrow */
+    color: #1DA1F2; /* Blue color */
+    cursor: pointer;
+    margin: 10px; /* Spacing around the arrow */
+    transition: color 0.3s ease; /* Smooth transition effect */
+}
+
+.wallet-back:hover {
+    color: #0d8ddc; /* Darker blue on hover */
+}
+
+
+    </style>
+</head>
+<body>
+    <div class="wallet-container">
+        <!-- Header -->
+        <header class="wallet-header">
+            <div class="wallet-title">
+                <span class="wallet-back" onclick="history.back();">&#8592;</span> <!-- Back arrow -->
+                <h1>Back</h1>
+                <span class="verified-badge"></span> <!-- Verified badge -->
+            </div>
+            <div class="wallet-menu">⋮</div>
+        </header>
+
+        <!-- P2P Market -->
+        <section class="wallet-market"
+            class="market-icon">
+            <h2>P2P Market</h2>
+            <p>Exchange assets directly with other users</p>
+            <div class="market-buttons">
+                <button class="btn buy-btn">Buy</button>
+                <button class="btn sell-btn">Sell</button>
+            </div>
+        </section>
+
+        <!-- Menu Items -->
+        <section class="wallet-menu-items">
+            <div class="menu-item">
+                <span class="menu-icon">&#128100;</span>
+                <p>My Ads</p>
+                <span class="menu-desc">Manage ads and payment settings</span>
+            </div>
+            <div class="menu-item">
+                <span class="menu-icon">+</span>
+                <p>Create Ad</p>
+            </div>
+            <div class="menu-item">
+                <span class="menu-icon">&#128276;</span>
+                <p>Notifications</p>
+            </div>
+            <div class="menu-item">
+                <span class="menu-icon">?</span>
+                <p>FAQ</p>
+            </div>
+        </section>
+
+        <!-- Orders -->
+        <footer class="wallet-orders">
+            <h3>My Orders</h3>
+            <p>Your orders will appear here</p>
+        </footer>
+    </div>
+</body>
+</html>

